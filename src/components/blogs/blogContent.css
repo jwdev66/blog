@@ -1,0 +1,42 @@
+.blogsPageDiv {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-height: 74vh;
+}
+.blogsPageGrid {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.blogCard {
+  margin: 1% 0.5% !important;
+}
+
+.blogPageTitle {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.blogPageImageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blogPageImage {
+  border-radius: 20px;
+}
+
+.blogPageSummaryDiv {
+  min-height: 60px;
+}
+
+.blogPageButtonDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.blogPageSummary {
+  text-align: justify;
+  font-size: 16px;
+}

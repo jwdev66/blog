@@ -1,31 +1,37 @@
 import React from "react";
+import "./blogContent.css";
 import { graphql, useStaticQuery } from "gatsby";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { makeStyles } from "@material-ui/core/styles";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Button, Card, CardContent, Grid } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  readMore: {
+    background: "linear-gradient(45deg, #53a3ff 30%, #6d6bfe 90%)",
+    textDecoration: "none",
+  },
+}));
 
 export const BlogsContent = () => {
+  const classes = useStyles();
   const data = useStaticQuery(
     graphql`
       query {
         allContentfulBlogPost {
           edges {
             node {
+              id
               title
               summary
-              body {
-                raw
-              }
               free
               image {
                 gatsbyImageData(
-                  width: 400
-                  height: 200
+                  width: 300
+                  height: 150
                   layout: CONSTRAINED
                   placeholder: TRACED_SVG
                 )
               }
-              source
-              publishedDate
               slug
             }
           }
@@ -33,58 +39,43 @@ export const BlogsContent = () => {
       }
     `
   );
-  console.log(data.allContentfulBlogPost.edges[0].node.image);
   return (
-    <div>
-      <div>
-        <h3>Title</h3>
-        <p>{data.allContentfulBlogPost.edges[0].node.title}</p>
-      </div>
-      <hr />
-      <div>
-        <h3>Summary</h3>
-        <p>{data.allContentfulBlogPost.edges[0].node.summary}</p>
-      </div>
-      <hr />
-      <div>
-        <h3>Body</h3>
-        <div>
-          {documentToReactComponents(
-            JSON.parse(data.allContentfulBlogPost.edges[0].node.body.raw)
-          )}
-        </div>
-      </div>
-      <hr />
-      <div>
-        <h3>Type</h3>
-        <p>
-          {data.allContentfulBlogPost.edges[0].node.free ? "Free" : "Premium"}
-        </p>
-      </div>
-      <hr />
-      <div>
-        <h3>Image</h3>
-        <GatsbyImage
-          image={getImage(data.allContentfulBlogPost.edges[0].node.image)}
-          alt={data.allContentfulBlogPost.edges[0].node.title}
-        />
-      </div>
-      <hr />
-      <div>
-        <h3>Source</h3>
-        <p>{data.allContentfulBlogPost.edges[0].node.source}</p>
-      </div>
-      <hr />
-      <div>
-        <h3>Published at</h3>
-        <p>{data.allContentfulBlogPost.edges[0].node.publishedDate}</p>
-      </div>
-      <hr />
-      <div>
-        <h3>Slug</h3>
-        <p>{data.allContentfulBlogPost.edges[0].node.slug}</p>
-      </div>
-      <hr />
+    <div className='blogsPageDiv'>
+      <Grid container className='blogsPageGrid'>
+        {data.allContentfulBlogPost.edges.map((edge) => (
+          <Grid
+            key={edge.node.id}
+            item
+            xs={12}
+            md={5}
+            component={Card}
+            elevation={0}
+            className='blogCard'
+            style={{ backgroundColor: "white" }}
+          >
+            <CardContent>
+              <h3 className='blogPageTitle'>
+                <strong>{edge.node.title}</strong>
+              </h3>
+              <div className='blogPageImageDiv'>
+                <GatsbyImage
+                  image={getImage(edge.node.image)}
+                  alt={edge.node.title}
+                  className='blogPageImage'
+                />
+              </div>
+              <div className='blogPageSummaryDiv'>
+                <p className='blogPageSummary'>{edge.node.summary}</p>
+              </div>
+              <div className='blogPageButtonDiv'>
+                <Button variant='contained' className={classes.readMore}>
+                  Read More
+                </Button>
+              </div>
+            </CardContent>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
