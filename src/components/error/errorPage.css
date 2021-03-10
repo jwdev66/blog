@@ -1,0 +1,30 @@
+.errorPage {
+  color: rgb(46, 38, 38);
+  margin: auto;
+  height: 70vh;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.err404 {
+  color: #eb7040;
+  font-size: 8rem;
+}
+.errorMsg {
+  text-align: center;
+  font-size: 1.2rem;
+  left: 16%;
+  top: 45%;
+  width: 75%;
+}
+.errorMsg strong {
+  color: green;
+}
+.errorMsg strong:hover {
+  cursor: pointer;
+}
+.errorMsg p {
+  margin-top: 20px;
+}

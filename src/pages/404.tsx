@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Layout from "../components/addOns/Layout";
+import { ErrorPage } from "../components/error/ErrorPage";
 
 export default function Error() {
   return (
@@ -9,7 +10,9 @@ export default function Error() {
         <title>Blogistan | 404</title>
       </Helmet>
       <div>
-        <Layout>Error Page</Layout>
+        <Layout>
+          <ErrorPage />
+        </Layout>
       </div>
     </div>
   );
