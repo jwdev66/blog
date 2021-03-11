@@ -34,3 +34,15 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+.premium {
+  color: red;
+}
+.buttonDiv {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.signInButton {
+  background: linear-gradient(45deg, #298155ce 30%, #298155 90%);
+  width: auto;
+}
