@@ -51,10 +51,26 @@ const BlogPost = (props: any) => {
             />
           </div>
           {props.data.contentfulBlogPost.free ? (
-            <div className='content'>
-              {documentToReactComponents(
-                JSON.parse(props.data.contentfulBlogPost.body.raw)
-              )}
+            <div>
+              <div className='content'>
+                {documentToReactComponents(
+                  JSON.parse(props.data.contentfulBlogPost.body.raw)
+                )}
+              </div>
+              <div>
+                {user && (
+                  <div className='buttonDiv'>
+                    <Button
+                      className='signOutButton'
+                      onClick={() => {
+                        netlifyIdentity.logout();
+                      }}
+                    >
+                      LogOut
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
           ) : (
             <div>

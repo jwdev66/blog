@@ -22,3 +22,10 @@
 .title {
   color: rgb(0, 81, 255);
 }
+.signInButton {
+  background: linear-gradient(45deg, #298155ce 30%, #298155 90%);
+}
+.signOutButton {
+  background: linear-gradient(45deg, #812959ce 30%, #814229 90%);
+  width: auto;
+}

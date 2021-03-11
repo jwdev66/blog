@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { IdentityContext } from "../../../identity-context";
 import { navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Landing = () => {
   const classes = useStyles();
+  const { user, identity: netlifyIdentity } = useContext(IdentityContext);
   return (
     <div className='homeContainer'>
       <Grid container className={classes.mainGrid}>
@@ -86,6 +88,29 @@ export const Landing = () => {
             >
               Blogs
             </Button>
+            {user === undefined ? (
+              <Button
+                variant='contained'
+                className='signInButton'
+                style={{ marginTop: "10px", width: "50%", alignSelf: "center" }}
+                onClick={() => {
+                  netlifyIdentity.open();
+                }}
+              >
+                Login
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                className='signOutButton'
+                style={{ marginTop: "10px", width: "50%", alignSelf: "center" }}
+                onClick={() => {
+                  netlifyIdentity.logout();
+                }}
+              >
+                LogOut
+              </Button>
+            )}
           </CardContent>
         </Grid>
       </Grid>
