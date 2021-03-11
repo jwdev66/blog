@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./blogPost.css";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
@@ -6,7 +6,7 @@ import Layout from "../components/addOns/Layout";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Button } from "@material-ui/core";
-import netlifyIdentity from "netlify-identity-widget";
+import { IdentityContext } from "../../identity-context";
 
 export const query = graphql`
   query($slug: String!) {
@@ -32,21 +32,7 @@ export const query = graphql`
 `;
 
 const BlogPost = (props: any) => {
-  const [user, setUser] = useState("");
-  useEffect(() => {
-    netlifyIdentity.init({});
-  });
-  netlifyIdentity.on(
-    "login",
-    (user: { user_metadata: { full_name: React.SetStateAction<string> } }) => {
-      netlifyIdentity.close();
-      setUser(user.user_metadata.full_name);
-    }
-  );
-  netlifyIdentity.on("logout", () => {
-    netlifyIdentity.close();
-    setUser("");
-  });
+  const { user, identity: netlifyIdentity } = useContext(IdentityContext);
   return (
     <div>
       <Helmet>
@@ -72,7 +58,7 @@ const BlogPost = (props: any) => {
             </div>
           ) : (
             <div>
-              {user === "" ? (
+              {user === undefined ? (
                 <div>
                   <div className='content'>
                     {props.data.contentfulBlogPost.summary}
@@ -101,9 +87,9 @@ const BlogPost = (props: any) => {
                   </div>
                   <div className='buttonDiv'>
                     <Button
-                      className='signInButton'
+                      className='signOutButton'
                       onClick={() => {
-                        netlifyIdentity.open();
+                        netlifyIdentity.logout();
                       }}
                     >
                       LogOut

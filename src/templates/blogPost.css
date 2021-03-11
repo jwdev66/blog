@@ -46,3 +46,8 @@
   background: linear-gradient(45deg, #298155ce 30%, #298155 90%);
   width: auto;
 }
+
+.signOutButton {
+  background: linear-gradient(45deg, #da29298c 30%, #da2929ce 90%);
+  width: auto;
+}
