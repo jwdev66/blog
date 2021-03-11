@@ -34,7 +34,7 @@ export const Landing = () => {
       <Grid container className={classes.mainGrid}>
         <Grid
           item
-          xs={8}
+          xs={12}
           md={5}
           component={Card}
           className={classes.componentGrid}
@@ -51,7 +51,7 @@ export const Landing = () => {
         </Grid>
         <Grid
           item
-          xs={8}
+          xs={12}
           md={5}
           component={Card}
           className={classes.componentGrid}
